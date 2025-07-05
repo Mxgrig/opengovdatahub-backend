@@ -1,6 +1,6 @@
-import express from 'express';
-import { body, validationResult } from 'express-validator';
-import {
+const express = require('express');
+const { body, validationResult } = require('express-validator');
+const {
   createUser,
   findUserByEmail,
   findUserById,
@@ -11,9 +11,9 @@ import {
   verifyEmailToken,
   createPasswordResetToken,
   resetPassword
-} from '../auth/auth.js';
-import { authenticateToken } from '../middleware/auth.js';
-import { sendVerificationEmail, sendPasswordResetEmail } from '../email/emailService.js';
+} = require('../auth/auth.js');
+const { authenticateToken } = require('../middleware/auth.js');
+const { sendVerificationEmail, sendPasswordResetEmail } = require('../email/emailService.js');
 
 const router = express.Router();
 
@@ -238,4 +238,4 @@ router.get('/verify', authenticateToken, (req, res) => {
   });
 });
 
-export default router;
+module.exports = router;

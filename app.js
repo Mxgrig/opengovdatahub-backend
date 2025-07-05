@@ -4,15 +4,7 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-const dotenv = require('dotenv');
-
-// Import routes
-const authRoutes = require('./routes/auth.js');
-const dataRoutes = require('./routes/data.js');
-const searchRoutes = require('./routes/search.js');
-
-// Load environment variables
-dotenv.config();
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -23,7 +15,7 @@ app.use(compression());
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'https://opengovdatahub.com',
   credentials: true
 }));
 
@@ -41,11 +33,6 @@ app.use(express.urlencoded({ extended: true }));
 // Logging
 app.use(morgan('combined'));
 
-// Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/data', dataRoutes);
-app.use('/api/search', searchRoutes);
-
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
@@ -57,12 +44,16 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Error handling middleware
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    error: 'Something went wrong!',
-    message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
+// Basic routes for testing
+app.get('/', (req, res) => {
+  res.json({
+    message: 'OpenGov DataHub Backend API',
+    version: '1.0.0',
+    status: 'running',
+    endpoints: {
+      health: '/api/health',
+      docs: '/api/routes'
+    }
   });
 });
 
@@ -71,35 +62,12 @@ app.get('/api/routes', (req, res) => {
   res.json({
     message: 'Available API routes',
     routes: {
-      auth: [
-        'POST /api/auth/register',
-        'POST /api/auth/login',
-        'POST /api/auth/verify-email',
-        'POST /api/auth/forgot-password',
-        'POST /api/auth/reset-password',
-        'GET /api/auth/profile',
-        'PUT /api/auth/profile',
-        'GET /api/auth/verify'
-      ],
-      data: [
-        'GET /api/data',
-        'GET /api/data/enhanced',
-        'POST /api/data/refresh',
-        'GET /api/data/cache/status',
-        'GET /api/data/proxy/*'
-      ],
-      search: [
-        'GET /api/search',
-        'GET /api/search/enhanced',
-        'GET /api/search/suggestions',
-        'GET /api/search/category/:type',
-        'POST /api/search/index/rebuild',
-        'GET /api/search/stats'
-      ],
       system: [
-        'GET /api/health',
-        'GET /api/routes'
-      ]
+        'GET / - API info',
+        'GET /api/health - Health check',
+        'GET /api/routes - This endpoint'
+      ],
+      note: 'Authentication and search routes will be added after successful deployment'
     }
   });
 });
@@ -115,9 +83,20 @@ app.use('*', (req, res) => {
   });
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: 'Something went wrong!',
+    message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
   console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
+
+module.exports = app;
