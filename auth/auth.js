@@ -58,12 +58,12 @@ const writeVerificationTokens = (tokens) => {
 };
 
 // Generate JWT token
-export const generateToken = (userId) => {
+const generateToken = (userId) => {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
 };
 
 // Verify JWT token
-export const verifyToken = (token) => {
+const verifyToken = (token) => {
   try {
     return jwt.verify(token, JWT_SECRET);
   } catch (error) {
@@ -72,17 +72,17 @@ export const verifyToken = (token) => {
 };
 
 // Hash password
-export const hashPassword = async (password) => {
+const hashPassword = async (password) => {
   return await bcrypt.hash(password, 12);
 };
 
 // Compare password
-export const comparePassword = async (password, hash) => {
+const comparePassword = async (password, hash) => {
   return await bcrypt.compare(password, hash);
 };
 
 // User management functions
-export const createUser = async (userData) => {
+const createUser = async (userData) => {
   const users = readUsers();
   
   // Check if user already exists
@@ -115,17 +115,17 @@ export const createUser = async (userData) => {
   return userWithoutPassword;
 };
 
-export const findUserByEmail = (email) => {
+const findUserByEmail = (email) => {
   const users = readUsers();
   return users.find(user => user.email === email);
 };
 
-export const findUserById = (id) => {
+const findUserById = (id) => {
   const users = readUsers();
   return users.find(user => user.id === id);
 };
 
-export const updateUser = (id, updates) => {
+const updateUser = (id, updates) => {
   const users = readUsers();
   const userIndex = users.findIndex(user => user.id === id);
   
@@ -142,7 +142,7 @@ export const updateUser = (id, updates) => {
 };
 
 // Email verification functions
-export const createVerificationToken = (userId, email) => {
+const createVerificationToken = (userId, email) => {
   const tokens = readVerificationTokens();
   const token = jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: '24h' });
   
@@ -162,7 +162,7 @@ export const createVerificationToken = (userId, email) => {
   return token;
 };
 
-export const verifyEmailToken = (token) => {
+const verifyEmailToken = (token) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     const tokens = readVerificationTokens();
@@ -186,7 +186,7 @@ export const verifyEmailToken = (token) => {
 };
 
 // Password reset functions
-export const createPasswordResetToken = (userId, email) => {
+const createPasswordResetToken = (userId, email) => {
   const token = jwt.sign({ userId, email, type: 'password-reset' }, JWT_SECRET, { expiresIn: '1h' });
   
   const tokens = readVerificationTokens();
@@ -208,7 +208,7 @@ export const createPasswordResetToken = (userId, email) => {
   return token;
 };
 
-export const verifyPasswordResetToken = (token) => {
+const verifyPasswordResetToken = (token) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
     
@@ -229,7 +229,7 @@ export const verifyPasswordResetToken = (token) => {
   }
 };
 
-export const resetPassword = async (token, newPassword) => {
+const resetPassword = async (token, newPassword) => {
   try {
     const decoded = verifyPasswordResetToken(token);
     const hashedPassword = await hashPassword(newPassword);
@@ -245,4 +245,20 @@ export const resetPassword = async (token, newPassword) => {
   } catch (error) {
     throw error;
   }
+};
+
+module.exports = {
+  generateToken,
+  verifyToken,
+  hashPassword,
+  comparePassword,
+  createUser,
+  findUserByEmail,
+  findUserById,
+  updateUser,
+  createVerificationToken,
+  verifyEmailToken,
+  createPasswordResetToken,
+  verifyPasswordResetToken,
+  resetPassword
 };
