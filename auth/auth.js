@@ -1,12 +1,9 @@
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { join } from 'path';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const { readFileSync, writeFileSync, existsSync } = require('fs');
+const { join } = require('path');
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// __dirname is available by default in CommonJS
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-super-secure-secret-key-change-this-in-production';
 const JWT_EXPIRES_IN = '7d';
