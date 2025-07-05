@@ -25,6 +25,8 @@ coverage/
 # Data files (will be recreated on Railway)
 data/
 *.json
+!package.json
+!package-lock.json
 
 # OS generated files
 .DS_Store
