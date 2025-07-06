@@ -1,0 +1,6 @@
+app: opengovdatahub-backend
+env:
+  NODE_ENV: production
+  JWT_SECRET: opengovdatahub-super-secure-jwt-2024-production  
+  FRONTEND_URL: https://opengovdatahub.com
+healthcheck: /api/health

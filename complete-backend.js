@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || process.env.LISTEN_PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'opengovdatahub-super-secure-jwt-2024';
 
 // Middleware

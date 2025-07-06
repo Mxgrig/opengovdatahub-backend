@@ -24,6 +24,16 @@ A zero-cost Firebase alternative providing JWT authentication, file-based storag
 - **Frontend**: https://opengovdatahub.com (Hostinger)
 - **Backend**: https://api.opengovdatahub.com (Railway)
 
+## 🚀 Deploy
+
+### One-Click Deploy Options:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Mxgrig/opengovdatahub-backend)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Mxgrig/opengovdatahub-backend)
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template?template=https://github.com/Mxgrig/opengovdatahub-backend)
+
 ## 🛠️ Development
 
 ```bash
