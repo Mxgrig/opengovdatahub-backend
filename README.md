@@ -26,13 +26,22 @@ A zero-cost Firebase alternative providing JWT authentication, file-based storag
 
 ## 🚀 Deploy
 
-### One-Click Deploy Options:
+### 📋 Quick Deploy Instructions:
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Mxgrig/opengovdatahub-backend)
+1. **Railway** (Recommended): Go to [railway.app/new](https://railway.app/new) → Deploy from GitHub → Select this repo
+2. **Render**: Click [Deploy to Render](https://render.com/deploy?repo=https://github.com/Mxgrig/opengovdatahub-backend)
+3. **Vercel**: Click [Deploy with Vercel](https://vercel.com/new/clone?repository-url=https://github.com/Mxgrig/opengovdatahub-backend)
+4. **Codespaces**: Go to this repo → Code → Create codespace → Auto-deploys with public URL
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Mxgrig/opengovdatahub-backend)
+### 🔧 Environment Variables (Set in deployment platform):
+```
+JWT_SECRET=opengovdatahub-production-jwt-2024
+FRONTEND_URL=https://opengovdatahub.com
+NODE_ENV=production
+```
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template?template=https://github.com/Mxgrig/opengovdatahub-backend)
+### ✅ Test Deployment:
+Once deployed, test: `https://your-app-url.com/api/health`
 
 ## 🛠️ Development
 
