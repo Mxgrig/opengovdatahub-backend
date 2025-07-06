@@ -10,11 +10,20 @@
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
   },
-  "keywords": ["government", "data", "api", "authentication"],
+  "keywords": [
+    "government",
+    "data",
+    "api",
+    "authentication"
+  ],
   "author": "",
   "license": "ISC",
   "description": "Zero-cost Firebase alternative for OpenGov DataHub",
   "dependencies": {
-    "express": "^4.18.2"
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2"
   }
 }

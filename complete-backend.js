@@ -11,7 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'opengovdatahub-super-secure-jwt-20
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'https://opengovdatahub.com',
+  origin: process.env.FRONTEND_URL || ['https://opengovdatahub.com', 'http://localhost:5173', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(express.json());
