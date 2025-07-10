@@ -60,3 +60,4 @@ Server runs on http://localhost:3001
 - Postcodes.io (geographic data)
 
 Built to replace Firebase and solve authentication/search issues.# Trigger deploy
+# Force redeploy Thu 10 Jul 14:31:45 BST 2025
