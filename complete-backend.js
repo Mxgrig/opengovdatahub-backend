@@ -374,6 +374,32 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+// Routes listing endpoint
+app.get('/api/routes', (req, res) => {
+  res.json({
+    message: 'Available API routes',
+    routes: {
+      system: [
+        'GET / - API info',
+        'GET /api/health - Health check',
+        'GET /api/routes - This endpoint'
+      ],
+      auth: [
+        'POST /api/auth/register - User registration',
+        'POST /api/auth/login - User login',
+        'GET /api/auth/profile - Get user profile'
+      ],
+      data: [
+        'GET /api/search - Search government data'
+      ]
+    },
+    deployment: {
+      timestamp: new Date().toISOString(),
+      version: '1.2.0'
+    }
+  });
+});
+
 // 404 handler (must be last)
 app.use('*', (req, res) => {
   res.status(404).json({
