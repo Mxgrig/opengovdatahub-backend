@@ -374,18 +374,18 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// 404 handler
+// 404 handler (must be last)
 app.use('*', (req, res) => {
   res.status(404).json({
     error: 'Route not found',
     path: req.originalUrl,
     method: req.method,
-    suggestion: 'Try GET / to see all available endpoints'
+    suggestion: 'Try GET /api/routes to see all available endpoints'
   });
 });
 
-// Start server (only if not in Vercel)
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+// Start server (for all environments except Vercel)
+if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
