@@ -404,8 +404,9 @@ app.use('*', (req, res) => {
 // Start server (for all environments except Vercel)
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`🚀 OpenGov DataHub Backend running on port ${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/api/health`);
+    console.log(`🔐 Auth endpoints: /api/auth/register, /api/auth/login`);
     console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
   });
 }
