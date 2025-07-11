@@ -11,12 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET || 'opengovdatahub-super-secure-jwt-20
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || [
-    'https://opengovdatahub.com', 
-    'https://www.opengovdatahub.com',
-    'http://localhost:5173', 
-    'http://localhost:3000'
-  ],
+  origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : [],
   credentials: true
 }));
 app.use(express.json());
@@ -384,11 +379,7 @@ app.get('/api/routes', (req, res) => {
         'GET /api/health - Health check',
         'GET /api/routes - This endpoint'
       ],
-      auth: [
-        'POST /api/auth/register - User registration',
-        'POST /api/auth/login - User login',
-        'GET /api/auth/profile - Get user profile'
-      ],
+      
       data: [
         'GET /api/search - Search government data'
       ]
