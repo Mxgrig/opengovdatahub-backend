@@ -61,7 +61,7 @@ const authenticateToken = (req, res, next) => {
 app.get('/', (req, res) => {
   res.json({
     message: 'OpenGov DataHub Backend API',
-    version: '1.0.0',
+    version: '1.2.1',
     status: 'running',
     endpoints: {
       health: '/api/health',
