@@ -1,9 +1,9 @@
 {
   "name": "firebase-alternative-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "complete-backend.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node complete-backend.js",
     "build": "echo 'No build step required'"
   },
   "engines": {
